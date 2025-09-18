@@ -56,3 +56,24 @@ Convert a page range (1-based, inclusive), grayscale, and limit max dimension:
 ```
 python pdf_to_images.py input.pdf --start 2 --end 5 --grayscale --max-dim 2000
 ```
+
+Python API
+```
+from pdf_to_images import pdf_to_images
+
+out_dir = pdf_to_images(
+    pdf_path="input.pdf",
+    out_dir="out",           # or None for "<PDF name>" folder
+    dpi=300,
+    quality=92,              # JPG/WEBP only; PNG ignores quality
+    start=1,                 # 1-based inclusive
+    end=10,
+    fmt="jpg",               # 'jpg' | 'png' | 'webp'
+    overwrite=True,
+    filename_template="{stem}_p{page:03d}",
+    password=None,           # provide a string for encrypted PDFs
+    grayscale=False,
+    max_dim=None,            # e.g., 2000 to cap longest side at 2000px
+)
+print("Saved to:", out_dir)
+```
